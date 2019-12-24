@@ -35,7 +35,9 @@ const AddExpense = props => {
 
   const handleSubmit = () => {
     setDate(today);
-    props.handleExpenseAdded();
+    setAmount("");
+    setExpenseDetail("");
+    props.handleExpenseAdded(selectedDate, expenseDetail, amount);
   };
 
   if (!visible) {
@@ -52,16 +54,16 @@ const AddExpense = props => {
             color={primary}
           />
           <TextInputCustom
-            placeholder="Details"
+            placeholder="Name"
             styling={styles.expenseDetail}
             value={expenseDetail}
-            onChange={handleChangeExpenseDetail}
+            onChangeText={handleChangeExpenseDetail}
           />
 
           <TextInputCustom
             placeholder="Amount"
             value={amount}
-            onChange={handleChangeAmount}
+            onChangeText={handleChangeAmount}
             styling={styles.expenseAmount}
             keyboardType="number-pad"
           />

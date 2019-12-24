@@ -4,6 +4,7 @@ import NavBar from "./navBar";
 import AddExpense from "./AddExpense";
 import AddNotes from "./addNotes";
 import { accent } from "./../utilities/colors";
+import { saveToDb } from "./../utilities/dbActions";
 
 const MainScreen = props => {
   const [visibleExpense, setVisibleExpense] = useState(false);
@@ -13,8 +14,14 @@ const MainScreen = props => {
     setVisibleExpense(true);
   };
 
-  const handleExpenseAdded = amount => {
+  const handleExpenseAdded = (date, name, amount) => {
     setVisibleExpense(false);
+    const expense = {
+      date: date,
+      amount: parseInt(amount),
+      name: name
+    };
+    saveToDb("expense", expense);
   };
 
   const handleAddNotes = () => {
